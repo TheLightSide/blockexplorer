@@ -41,6 +41,9 @@ public class Address implements Serializable {
     @Column(name = "vin_height")
     private long vinHeight;
 
+    @Column(name = "hex", columnDefinition="character varying", length = 64)
+    private String hex;
+
     public String getAddress() {
         return address;
     }
@@ -111,5 +114,13 @@ public class Address implements Serializable {
 
     public void setVinHeight(long vinHeight) {
         this.vinHeight = vinHeight;
+    }
+
+    public String getHex() {
+        return hex;
+    }
+
+    public void setHex(String hex) {
+        this.hex = hex;
     }
 }

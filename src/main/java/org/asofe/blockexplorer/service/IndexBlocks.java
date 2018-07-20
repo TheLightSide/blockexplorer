@@ -94,6 +94,7 @@ public class IndexBlocks {
                 address1.setN(n);
                 address1.setSpent(0);
                 address1.setHeight(height);
+                address1.setHex(tr_vout.getScriptPubKey().getHex());
                 addressRepository.save(address1);
             }
         }

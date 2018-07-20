@@ -1,12 +1,16 @@
 package org.asofe.blockexplorer.controller;
 
 import org.asofe.blockexplorer.model.response.AddressMempool;
+import org.asofe.blockexplorer.model.response.AddressUTXOs;
+import org.asofe.blockexplorer.service.AddressUTXOsService;
 import org.asofe.blockexplorer.service.MemPools;
 import org.asofe.blockexplorer.utils.Commands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = {"/api/v1"})
@@ -17,6 +21,9 @@ public class MainController {
 
     @Autowired
     private MemPools memPools;
+
+    @Autowired
+    private AddressUTXOsService addressUTXOsService;
 
     // Create new user rig.
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -39,4 +46,11 @@ public class MainController {
     public AddressMempool getAddressMempool(@RequestBody String[] addresses) throws Throwable {
         return memPools.getAddressMempool(addresses);
     }
+
+    @RequestMapping(value = "getaddressutxos", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ArrayList<AddressUTXOs> getAddressUTXOs(@RequestBody String[] addresses) throws Throwable {
+        return addressUTXOsService.getAddressUTXos(addresses);
+    }
+
 }
