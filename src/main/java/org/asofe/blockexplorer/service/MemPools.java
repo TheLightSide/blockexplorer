@@ -34,7 +34,7 @@ public class MemPools {
 
         for (Map.Entry<String, TxOut> entry : txOuts.entrySet()) {
             for (String address: addresses) {
-                if (Arrays.asList(entry.getValue().getScriptPubKey().getAddresses()).contains(address)) {
+                if (entry.getValue() != null && Arrays.asList(entry.getValue().getScriptPubKey().getAddresses()).contains(address)) {
                     addressTxids.add(entry.getKey());
                     totalBalance += entry.getValue().getValue();
                 }
